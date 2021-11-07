@@ -6,46 +6,63 @@
  * @flow strict-local
  */
 
+import {isEmpty} from 'lodash';
 import React from 'react';
 
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
-  TextInput,
   useColorScheme,
-  TouchableOpacity,
-  View,
-  Text
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import SearchInput from "./components/SearchInput"
+import SearchInput from './components/SearchInput';
+import CountryInfo from './components/CountryInfo';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
+  const [country, setCountry] = React.useState([]);
 
   const backgroundStyle = {
-    flex:1,
+    flex: 1,
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const onSearch = (searchKey) => {
+  const onSearch = searchKey => {
     fetch(`https://restcountries.com/v2/name/${searchKey}`)
-    .then((response) => response.json())
-    .then((json) => {
-      console.log("json",json)
-      //return json.movies;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-  }
+      .then(response => response.json())
+      .then(json => {
+        let countriesArray = [];
+        if (!isEmpty(json)) {
+          json.map(data => {
+            let countryObj = {
+              name: '',
+              population: 0,
+              currencies: [],
+              capital: '',
+              flag: '',
+            };
+            countryObj['name'] = data.name;
+            countryObj['population'] = data.population;
+            countryObj['currencies'] = data.currencies;
+            countryObj['capital'] = data.capital;
+            countryObj['flag'] = data.flags.png;
+            countriesArray.push(countryObj);
+          });
+        }
+        console.log('countries', json);
+        setCountry(countriesArray);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
 
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <SearchInput onSearch={onSearch}/>
+      <SearchInput onSearch={onSearch} />
+      {!isEmpty(country) ? <CountryInfo countries={country} /> : null}
     </SafeAreaView>
   );
 };

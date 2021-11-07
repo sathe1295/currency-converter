@@ -1,12 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
- import React from 'react';
+import React from 'react';
 
  import {
    StyleSheet,
@@ -30,7 +22,7 @@
    }
   
    return (
-       <View style={{flex:1, flexDirection:"row",marginHorizontal:20, marginVertical:20,}}>
+       <View style={{flexDirection:"row",marginHorizontal:20, marginVertical:20,}}>
        <TextInput
        style={{ height:50, padding:10,flex:1, borderWidth:1, borderColor:"gray", borderRadius:5}}
            placeholder="Search"
