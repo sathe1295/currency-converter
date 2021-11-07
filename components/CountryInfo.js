@@ -4,14 +4,20 @@ import Seperator from './Seperator';
 import {StyleSheet, View, Text, Image, FlatList} from 'react-native';
 
 const CountryInfo = props => {
-  const {countries} = props;
+  const {countries, convertedAmount} = props;
   return (
-    <View style={{flex:1,justifyContent: 'center'}}>
+    <View style={styles.countryInfo}>
       <FlatList
         data={countries}
-        ItemSeparatorComponent = {()=><Seperator/> }
+        ItemSeparatorComponent={() => <Seperator />}
         renderItem={({item, index}) => {
-          return <CountryItem index={index} country={item} />;
+          return (
+            <CountryItem
+              key={index}
+              country={item}
+              convertedAmount={convertedAmount}
+            />
+          );
         }}
       />
     </View>
@@ -19,25 +25,25 @@ const CountryInfo = props => {
 };
 
 const CountryItem = props => {
-  const {country, index} = props;
+  const {country, convertedAmount} = props;
   return (
-    <View key={index} style={{padding:10}}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-        <Text style={{textAlign: 'left'}}>{country.name}</Text>
+    <View style={styles.container}>
+      <View style={styles.sectionContainer}>
+        <Text style={styles.countryName}>{country.name}</Text>
         <Image source={{uri: country.flag}} style={{height: 20, width: 50}} />
       </View>
-      <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+      <View style={styles.sectionContainer}>
         <Text>Population: {country.population}</Text>
         <Text>Capital: {country.capital}</Text>
       </View>
       {country.currencies.length > 0
         ? country.currencies.map(currency => {
             return (
-              <View
-                key={'currency_view0'}
-                style={{justifyContent: 'space-around'}}>
-                <Text style={{textAlign: 'center'}}>Currency Details:</Text>
-                <View style={{flexDirection: 'row'}}>
+              <View style={styles.currencyDetails}>
+                <Text style={styles.currencyDetailsTitle}>
+                  Currency Details:
+                </Text>
+                <View style={styles.itemDetails}>
                   <Text key={currency.code}>
                     Currency Code: {currency.code}{' '}
                   </Text>
@@ -45,10 +51,15 @@ const CountryItem = props => {
                     Currency Name: {currency.name}{' '}
                   </Text>
                 </View>
-                <View style={{flexDirection: 'row'}}>
+                <View style={styles.itemDetails}>
                   <Text key={currency.symbol}>
                     Currency Symbol: {currency.symbol}{' '}
                   </Text>
+                  {convertedAmount >= 0 ? (
+                    <Text style={styles.conversion}>
+                      Converted currency: {convertedAmount}
+                    </Text>
+                  ) : null}
                 </View>
               </View>
             );
@@ -58,22 +69,14 @@ const CountryItem = props => {
   );
 };
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+    countryInfo:{flex: 1, justifyContent: 'center'},
+  container: {padding: 10},
+  sectionContainer: {flexDirection: 'row', justifyContent: 'space-around'},
+  currencyDetails: {justifyContent: 'space-around', marginTop: 20},
+  itemDetails: {flexDirection: 'row', justifyContent: 'space-around'},
+  countryName: {textAlign: 'left'},
+  currencyDetailsTitle: {textAlign: 'center'},
+  conversion: {backgroundColor: 'yellow'}
 });
 
 export default CountryInfo;
