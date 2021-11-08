@@ -4,7 +4,7 @@ import Seperator from './Seperator';
 import {StyleSheet, View, Text, Image, FlatList} from 'react-native';
 
 const CountryInfo = props => {
-  const {countries, convertedAmount} = props;
+  const {countries, showConversion} = props;
   return (
     <View style={styles.countryInfo}>
       <FlatList
@@ -15,7 +15,7 @@ const CountryInfo = props => {
             <CountryItem
               key={index}
               country={item}
-              convertedAmount={convertedAmount}
+              showConversion={showConversion}
             />
           );
         }}
@@ -25,7 +25,7 @@ const CountryInfo = props => {
 };
 
 const CountryItem = props => {
-  const {country, convertedAmount} = props;
+  const {country,showConversion} = props;
   return (
     <View style={styles.container}>
       <View style={styles.sectionContainer}>
@@ -55,9 +55,9 @@ const CountryItem = props => {
                   <Text key={currency.symbol}>
                     Currency Symbol: {currency.symbol}{' '}
                   </Text>
-                  {convertedAmount >= 0 ? (
+                  {showConversion ? (
                     <Text style={styles.conversion}>
-                      Converted currency: {convertedAmount}
+                      Converted currency: {currency.converted_amount}
                     </Text>
                   ) : null}
                 </View>
