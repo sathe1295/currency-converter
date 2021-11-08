@@ -10,11 +10,12 @@ import {
   TextInput,
   TouchableOpacity,
   Text,
+  Image
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import InputBox from '../components/InputBox';
 import CountryInfo from '../components/CountryInfo';
-import {SEARCH_ICON, CONVERT_ICON} from '../assets/index'
+import {SEARCH_ICON, CONVERT_ICON, CURRENCY_ICON} from '../assets/index'
 
 const MainScreen = () => {
   const [country, setCountry] = React.useState();
@@ -24,7 +25,6 @@ const MainScreen = () => {
   const backgroundStyle = {
     flex: 1,
     backgroundColor: "light-gray",
-    justifyContent:'center'
   };
 
   const onSearch = searchKey => {
@@ -96,6 +96,9 @@ const MainScreen = () => {
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar/>
+      <View style={styles.currencyIconContainer}>
+      <Image source={CURRENCY_ICON} resizeMode={"contain"} style={styles.currencyIcon}/>
+      </View>
       <InputBox
         onButtonPress={onSearch}
         placeholder={'Enter country name'}
@@ -112,5 +115,9 @@ const MainScreen = () => {
     </SafeAreaView>
   );
 };
+const styles = StyleSheet.create({
+  currencyIconContainer: {alignItems:'center', marginTop:30},
+  currencyIcon: {height:200, width:150}
+})
 
 export default MainScreen;

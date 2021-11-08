@@ -25,9 +25,9 @@ const CountryItem = props => {
           <Text style={styles.text}>Capital: {country.capital}</Text>
         </View>
         {country.currencies.length > 0
-          ? country.currencies.map(currency => {
+          ? country.currencies.map((currency, index) => {
               return (
-                <View style={styles.currencyDetails}>
+                <View key={index} style={styles.currencyDetails}>
                   <Text style={styles.currencyDetails}>Currency Details:</Text>
                   <View style={styles.itemDetails}>
                     <Text key={currency.code} style={styles.text}>

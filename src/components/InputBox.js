@@ -48,6 +48,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'gray',
     borderRadius: 5,
+    shadowOffset: {
+      width: 0.5,
+      height: 0.2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 0.5,
+    elevation: 1,
   },
   button: {
     right: 0,
@@ -56,6 +63,7 @@ const styles = StyleSheet.create({
     borderLeftColor: 'green',
     paddingHorizontal: 8,
     height: 50,
+    backgroundColor:'green'
   },
   icon: {height: 20, width: 20, top: 12},
 });
