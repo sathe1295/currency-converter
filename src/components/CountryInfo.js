@@ -15,55 +15,79 @@ const CountryItem = props => {
   const {country, showConversion, index} = props;
   return (
     <View key={index} style={styles.container}>
-    <View style={styles.sectionContainer}>
-      <Text style={styles.countryName}>{country.name}</Text>
-      <Image source={{uri: country.flag}} style={{height: 30, width: 50}} />
+      <View style={styles.sectionContainer}>
+        <Image source={{uri: country.flag}} style={styles.flag} />
+        <Text style={styles.countryName}>{country.name}</Text>
+      </View>
+      <View>
+        <View style={{marginTop: 10}}>
+          <Text style={styles.text}>Population: {country.population}</Text>
+          <Text style={styles.text}>Capital: {country.capital}</Text>
+        </View>
+        {country.currencies.length > 0
+          ? country.currencies.map(currency => {
+              return (
+                <View style={styles.currencyDetails}>
+                  <Text style={styles.currencyDetails}>Currency Details:</Text>
+                  <View style={styles.itemDetails}>
+                    <Text key={currency.code} style={styles.text}>
+                      Currency Code: {currency.code}{' '}
+                    </Text>
+                    <Text key={currency.name} style={styles.text}>
+                      Currency Name: {currency.name}{' '}
+                    </Text>
+                  </View>
+                  <View style={styles.itemDetails}>
+                    <Text key={currency.symbol} style={styles.text}>
+                      Currency Symbol: {currency.symbol}{' '}
+                    </Text>
+                    {showConversion ? (
+                      <Text style={styles.conversion}>
+                        Converted currency: {currency.converted_amount}
+                      </Text>
+                    ) : null}
+                  </View>
+                </View>
+              );
+            })
+          : null}
+      </View>
     </View>
-    <View>
-      <Text>Population: {country.population}</Text>
-      <Text>Capital: {country.capital}</Text>
-    </View>
-    {country.currencies.length > 0
-      ? country.currencies.map(currency => {
-          return (
-            <View style={styles.currencyDetails}>
-              <Text style={styles.currencyDetailsTitle}>
-                Currency Details:
-              </Text>
-              <View style={[styles.itemDetails,{ justifyContent: 'space-around'}]}>
-                <Text key={currency.code}>
-                  Currency Code: {currency.code}{' '}
-                </Text>
-                <Text key={currency.name}>
-                  Currency Name: {currency.name}{' '}
-                </Text>
-              </View>
-              <View style={[styles.itemDetails,{ justifyContent: 'space-around'}]}>
-                <Text key={currency.symbol}>
-                  Currency Symbol: {currency.symbol}{' '}
-                </Text>
-                {showConversion ? (
-                  <Text style={styles.conversion}>
-                    Converted currency: {currency.converted_amount}
-                  </Text>
-                ) : null}
-              </View>
-            </View>
-          );
-        })
-      : null}
-  </View>
   );
 };
 const styles = StyleSheet.create({
-countryInfo:{justifyContent:'center', alignItems:'center', },
-container: {padding:10,borderWidth:1, borderRadius:5, borderColor:'gray',width:"80%"},
-sectionContainer: {flexDirection: 'row', justifyContent: 'space-around', marginVertical:5, alignItems:'center'},
-currencyDetails: {justifyContent: 'space-around', marginTop: 10, alignItems:'center'},
-itemDetails: {},
-countryName: {textAlign: 'center'},
-currencyDetailsTitle: {textAlign: 'center'},
-conversion: {backgroundColor: 'yellow'}
+  countryInfo: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  container: {
+    padding: 10,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: 'gray',
+    width: '90%',
+  },
+  sectionContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginVertical: 5,
+    alignItems: 'center',
+  },
+  currencyDetails: {
+    justifyContent: 'space-around',
+    marginTop: 10,
+    fontSize: 14,
+    fontWeight: '700',
+  },
+  itemDetails: {marginTop: 5, justifyContent: 'space-around'},
+  countryName: {textAlign: 'center', fontWeight: 'bold', fontSize: 16},
+  conversion: {backgroundColor: 'yellow', fontWeight: '500'},
+  flag: {height: 30, width: 50},
+  text: {
+    fontWeight: '400',
+    marginTop: 2,
+  },
 });
 
 export default CountryInfo;
