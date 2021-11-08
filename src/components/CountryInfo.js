@@ -13,7 +13,7 @@ const CountryInfo = props => {
 
 const CountryItem = props => {
   const {country, showConversion, index} = props;
-  console.log("currencie", country)
+  console.log('currencie', country);
   return (
     <View key={index} style={styles.container}>
       <View style={styles.sectionContainer}>

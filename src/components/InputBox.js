@@ -3,13 +3,10 @@ import React from 'react';
 import {
   StyleSheet,
   TextInput,
-  useColorScheme,
   TouchableOpacity,
   View,
-  Text,
   Image,
 } from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 const InputBox = props => {
   const {onButtonPress, placeholder, icon} = props;
@@ -63,7 +60,7 @@ const styles = StyleSheet.create({
     borderLeftColor: 'green',
     paddingHorizontal: 8,
     height: 50,
-    backgroundColor:'green'
+    backgroundColor: 'green',
   },
   icon: {height: 20, width: 20, top: 12},
 });
