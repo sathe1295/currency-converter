@@ -2,36 +2,26 @@
 import {isEmpty} from 'lodash';
 
 export const searchCountryByFullName = async (searchKey) => {
-   await  fetch(`https://restcountries.com/v2/name/${searchKey}?fullText=true`)
-      .then(response => response.json())
-      .then(json => {
-        let countriesArray = [];
-        if (!isEmpty(json) && json.length>0) {
-          console.log("json", json)
-          json.map(data => {
-            let countryObj = {
-              name: '',
-              population: 0,
-              currencies: [],
-              capital: '',
-              flag: '',
-            };
-            countryObj['name'] = data.name;
-            countryObj['population'] = data.population;
-            countryObj['currencies'] = data.currencies;
-            countryObj['capital'] = data.capital;
-            countryObj['flag'] = data.flags.png;
-            countriesArray.push(countryObj);
-          });
-
-          console.log("hem", countriesArray)
-        return countriesArray
-        }
-        console.log('countries', json);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    let countryObj={}
+  let res = await  fetch(`https://restcountries.com/v2/name/${searchKey}?fullText=true`)
+      if(res.status===200){
+          console.log("rs",res)
+          let json = await res.json();
+          if (!isEmpty(json) && json.length>0) {
+                  console.log("json", json)
+                  json.map(data => {
+                    countryObj['name'] = data.name;
+                    countryObj['population'] = data.population;
+                    countryObj['currencies'] = data.currencies;
+                    countryObj['capital'] = data.capital;
+                    countryObj['flag'] = data.flags.png;
+                  });
+      }
+    } else{
+        alert("Something went wrong")
+    }
+    console.log("countryobj", countryObj)
+    return countryObj
 }
 
 

@@ -13,6 +13,7 @@ const CountryInfo = props => {
 
 const CountryItem = props => {
   const {country, showConversion, index} = props;
+  console.log("currencie", country)
   return (
     <View key={index} style={styles.container}>
       <View style={styles.sectionContainer}>
@@ -24,7 +25,7 @@ const CountryItem = props => {
           <Text style={styles.text}>Population: {country.population}</Text>
           <Text style={styles.text}>Capital: {country.capital}</Text>
         </View>
-        {country.currencies.length > 0
+        {country.currencies && country.currencies.length > 0
           ? country.currencies.map((currency, index) => {
               return (
                 <View key={index} style={styles.currencyDetails}>

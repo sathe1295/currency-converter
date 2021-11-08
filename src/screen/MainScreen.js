@@ -16,6 +16,7 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import InputBox from '../components/InputBox';
 import CountryInfo from '../components/CountryInfo';
 import {SEARCH_ICON, CONVERT_ICON, CURRENCY_ICON} from '../assets/index'
+import { searchCountryByFullName } from '../api/currencies';
 
 const MainScreen = () => {
   const [country, setCountry] = React.useState();
@@ -27,38 +28,9 @@ const MainScreen = () => {
     backgroundColor: "light-gray",
   };
 
-  const onSearch = searchKey => {
-    fetch(`https://restcountries.com/v2/name/${searchKey}?fullText=true`)
-      .then(response => {
-        if (response.ok) {
-        return response.json();
-      } else {
-        alert('Something went wrong');
-      }})
-      .then(json => {
-        if (!isEmpty(json) && json.length>0) {
-          console.log("json", json)
-          json.map(data => {
-            let countryObj = {
-              name: '',
-              population: 0,
-              currencies: [],
-              capital: '',
-              flag: '',
-            };
-            countryObj['name'] = data.name;
-            countryObj['population'] = data.population;
-            countryObj['currencies'] = data.currencies;
-            countryObj['capital'] = data.capital;
-            countryObj['flag'] = data.flags.png;
-            setCountry(countryObj);
-          });
-        }
-        setShowConversion(false)
-      })
-      .catch(error => {
-        console.error(error);
-      });
+  const onSearch = async searchKey => {
+    let country = await searchCountryByFullName(searchKey)
+    setCountry(country)
   };
 
   const onConvert = amt => {
