@@ -13,17 +13,18 @@ import {
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import InputBox from '../components/InputBox';
-import CountryInfo from '../components/list/CountryInfo';
+import CountryInfo from '../components/CountryInfo';
 
 const MainScreen = () => {
   const isDarkMode = useColorScheme() === 'dark';
-  const [country, setCountry] = React.useState([]);
+  const [country, setCountry] = React.useState();
   const [showConversion, setShowConversion] = React.useState(false);
   //const API_KEY = "61b0b5431d64185d5550538d4c0b6f30" fixer.io
 
   const backgroundStyle = {
     flex: 1,
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    justifyContent:'center'
   };
 
   const onSearch = searchKey => {
@@ -35,7 +36,6 @@ const MainScreen = () => {
         alert('Something went wrong');
       }})
       .then(json => {
-        let countriesArray = [];
         if (!isEmpty(json) && json.length>0) {
           console.log("json", json)
           json.map(data => {
@@ -51,11 +51,9 @@ const MainScreen = () => {
             countryObj['currencies'] = data.currencies;
             countryObj['capital'] = data.capital;
             countryObj['flag'] = data.flags.png;
-            countriesArray.push(countryObj);
+            setCountry(countryObj);
           });
         }
-        console.log('countries', json);
-        setCountry(countriesArray);
         setShowConversion(false)
       })
       .catch(error => {
@@ -77,14 +75,14 @@ const MainScreen = () => {
     //   .catch(error => {
     //     console.error(error);
     //   });
-      country.length>0 && country.map(item => {
-        item.currencies.map(currency => {
-          console.log('code', currency.code);
+        country.currencies.map(currency => {
           fetch(
             `https://api.frankfurter.app/latest?amount=${amt}&from=SEK&to=${currency.code}`,
           )
             .then(response => response.json())
             .then(json => {
+
+          console.log('code', currency.code);
               currency['converted_amount'] = json.rates[currency.code];
               setShowConversion(true);
               console.log('currency conversion', currency.converted_amount);
@@ -93,7 +91,6 @@ const MainScreen = () => {
               console.error(err);
             });
         });
-      });
   };
 
   return (
