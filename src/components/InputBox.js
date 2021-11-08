@@ -7,11 +7,12 @@ import {
   TouchableOpacity,
   View,
   Text,
+  Image,
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 const InputBox = props => {
-  const {onButtonPress, placeholder, buttonLabel} = props;
+  const {onButtonPress, placeholder, icon} = props;
   const [value, setValue] = React.useState('');
 
   const handleChangeText = text => {
@@ -31,8 +32,8 @@ const InputBox = props => {
         onChangeText={handleChangeText}
         onSubmitEditing={onSubmit}
       />
-      <TouchableOpacity onPress={onSubmit}>
-        <Text>{buttonLabel}</Text>
+      <TouchableOpacity onPress={onSubmit} style={styles.button}>
+        <Image source={icon} style={styles.icon} />
       </TouchableOpacity>
     </View>
   );
@@ -48,6 +49,15 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderRadius: 5,
   },
+  button: {
+    right: 0,
+    position: 'absolute',
+    borderLeftWidth: 1,
+    borderLeftColor: 'green',
+    paddingHorizontal: 8,
+    height: 50,
+  },
+  icon: {height: 20, width: 20, top: 12},
 });
 
 export default InputBox;

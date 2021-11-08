@@ -14,16 +14,16 @@ import {
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import InputBox from '../components/InputBox';
 import CountryInfo from '../components/CountryInfo';
+import {SEARCH_ICON, CONVERT_ICON} from '../assets/index'
 
 const MainScreen = () => {
-  const isDarkMode = useColorScheme() === 'dark';
   const [country, setCountry] = React.useState();
   const [showConversion, setShowConversion] = React.useState(false);
   //const API_KEY = "61b0b5431d64185d5550538d4c0b6f30" fixer.io
 
   const backgroundStyle = {
     flex: 1,
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: "light-gray",
     justifyContent:'center'
   };
 
@@ -95,16 +95,16 @@ const MainScreen = () => {
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <StatusBar/>
       <InputBox
         onButtonPress={onSearch}
         placeholder={'Enter country name'}
-        buttonLabel={'Search'}
+        icon={SEARCH_ICON}
       />
       <InputBox
         onButtonPress={onConvert}
         placeholder={'Enter amount in SEK'}
-        buttonLabel={'Convert'}
+        icon={CONVERT_ICON}
       />
       {!isEmpty(country) ? (
         <CountryInfo countries={country} showConversion={showConversion} />

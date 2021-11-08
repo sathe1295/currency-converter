@@ -60,6 +60,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
+    shadowOffset: {
+      width: 0.5,
+      height: 1,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 0.5,
+    elevation: 1,
   },
   container: {
     padding: 10,
@@ -67,6 +74,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: 'gray',
     width: '90%',
+
+    backgroundColor: 'white',
   },
   sectionContainer: {
     flexDirection: 'row',
