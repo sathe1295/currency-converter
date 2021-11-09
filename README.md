@@ -5,8 +5,9 @@
 - The user can enter amount in SEK and convert it to the the searched country's currency.
 - Steps to run the app:
    1. Clone the repo
-   2. yarn install
-   3. Run the app
+   2. Switch to master branch
+   3. yarn install
+   4. Run the app
 
 **PS: Enter full country name to search the country**
 
