@@ -5,3 +5,4 @@
 - The user can enter amount in SEK and convert it to the the searched country's currency.
 
 
+
