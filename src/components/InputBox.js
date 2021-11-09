@@ -7,6 +7,7 @@ import {
   Image,
   Text,
 } from 'react-native';
+import { BORDER_GRAY,INPUT_BOX_BUTTON } from '../constants/ColorConstants';
 
 const InputBox = props => {
   const {onButtonPress, placeholder, icon, title} = props;
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 1,
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: BORDER_GRAY,
     borderRadius: 5,
     shadowOffset: {
       width: 0.5,
@@ -60,11 +61,9 @@ const styles = StyleSheet.create({
   button: {
     right: 0,
     position: 'absolute',
-    borderLeftWidth: 1,
-    borderLeftColor: 'green',
     paddingHorizontal: 8,
     height: 50,
-    backgroundColor: 'green',
+    backgroundColor: INPUT_BOX_BUTTON,
   },
   icon: {height: 20, width: 20, top: 12},
   title: {fontWeight: '400', marginBottom: 5},

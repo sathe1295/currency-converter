@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
+import { BORDER_GRAY, HIGHLIGHT, WHITE } from '../constants/ColorConstants';
 
 const CountryInfo = props => {
   const {countries, showConversion} = props;
@@ -78,10 +79,9 @@ const styles = StyleSheet.create({
     padding: 10,
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: 'gray',
+    borderColor: BORDER_GRAY,
     width: '90%',
-
-    backgroundColor: 'white',
+    backgroundColor: WHITE ,
   },
   sectionContainer: {
     flexDirection: 'row',
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     width: '70%',
   },
-  conversion: {backgroundColor: 'yellow', fontWeight: '500'},
+  conversion: {backgroundColor: HIGHLIGHT, fontWeight: '500'},
   flag: {height: 30, width: 50},
   text: {
     fontWeight: '400',

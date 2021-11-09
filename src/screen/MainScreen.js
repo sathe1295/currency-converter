@@ -8,6 +8,7 @@ import CountryInfo from '../components/CountryInfo';
 
 import {SEARCH_ICON, CONVERT_ICON, CURRENCY_ICON} from '../assets/index';
 import {convertAmount, searchCountryByFullName} from '../api/currencies';
+import { SCREEN_BG } from '../constants/ColorConstants';
 
 const MainScreen = () => {
   const [country, setCountry] = React.useState();
@@ -59,7 +60,7 @@ const MainScreen = () => {
 const styles = StyleSheet.create({
   backgroundStyle: {
     flex: 1,
-    backgroundColor: 'light-gray',
+    backgroundColor: SCREEN_BG,
   },
   currencyIconContainer: {alignItems: 'center', marginTop: 30},
   currencyIcon: {height: 200, width: 150},

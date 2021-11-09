@@ -1,4 +1,5 @@
 import {isEmpty} from 'lodash';
+import { BASE_CURRENCY_FOR_CONVERSION } from '../constants/Constants';
 
 export const searchCountryByFullName = async searchKey => {
   let countryObj = {};
@@ -32,13 +33,13 @@ export const searchCountryByFullName = async searchKey => {
 
 export const convertAmount = async (amt, code) => {
   let convertedAmount = 0;
-  if (code === 'SEK') {
+  if (code === BASE_CURRENCY_FOR_CONVERSION) {
     convertedAmount = amt;
     return convertedAmount;
   } else {
     try {
       let response = await fetch(
-        `https://api.frankfurter.app/latest?amount=${amt}&from=SEK&to=${code}`,
+        `https://api.frankfurter.app/latest?amount=${amt}&from=${BASE_CURRENCY_FOR_CONVERSION}&to=${code}`,
       );
       if (response.status === 200) {
         let data = await response.json();
