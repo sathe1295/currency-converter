@@ -1,12 +1,11 @@
 import {isEmpty} from 'lodash';
-import { BASE_CURRENCY_FOR_CONVERSION } from '../constants/Constants';
+import {BASE_CURRENCY_FOR_CONVERSION} from '../constants/Constants';
 
 export const searchCountryByFullName = async searchKey => {
   let countryObj = {};
+  const fetchCountriesUrl = `https://restcountries.com/v2/name/${searchKey}?fullText=true`;
   try {
-    let res = await fetch(
-      `https://restcountries.com/v2/name/${searchKey}?fullText=true`,
-    );
+    let res = await fetch(fetchCountriesUrl);
     if (res.status === 200) {
       let json = await res.json();
       if (!isEmpty(json) && json.length > 0) {
@@ -33,14 +32,13 @@ export const searchCountryByFullName = async searchKey => {
 
 export const convertAmount = async (amt, code) => {
   let convertedAmount = 0;
+  const conversionUrl = `https://api.frankfurter.app/latest?amount=${amt}&from=${BASE_CURRENCY_FOR_CONVERSION}&to=${code}`;
   if (code === BASE_CURRENCY_FOR_CONVERSION) {
     convertedAmount = amt;
     return convertedAmount;
   } else {
     try {
-      let response = await fetch(
-        `https://api.frankfurter.app/latest?amount=${amt}&from=${BASE_CURRENCY_FOR_CONVERSION}&to=${code}`,
-      );
+      let response = await fetch(conversionUrl);
       if (response.status === 200) {
         let data = await response.json();
         convertedAmount = data.rates[code];
