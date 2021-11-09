@@ -8,7 +8,7 @@ import CountryInfo from '../components/CountryInfo';
 
 import {SEARCH_ICON, CONVERT_ICON, CURRENCY_ICON} from '../assets/index';
 import {convertAmount, searchCountryByFullName} from '../api/currencies';
-import { SCREEN_BG } from '../constants/ColorConstants';
+import {SCREEN_BG} from '../constants/ColorConstants';
 
 const MainScreen = () => {
   const [country, setCountry] = React.useState();
@@ -44,10 +44,12 @@ const MainScreen = () => {
         placeholder={'Enter country name'}
         title={'Country Name'}
         icon={SEARCH_ICON}
+        keyboard={'default'}
       />
       <InputBox
         onButtonPress={onConvert}
         title={'Amount'}
+        keyboard={'number-pad'}
         placeholder={'Enter amount in SEK'}
         icon={CONVERT_ICON}
       />

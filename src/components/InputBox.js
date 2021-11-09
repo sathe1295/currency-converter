@@ -10,7 +10,7 @@ import {
 import { BORDER_GRAY,INPUT_BOX_BUTTON } from '../constants/ColorConstants';
 
 const InputBox = props => {
-  const {onButtonPress, placeholder, icon, title} = props;
+  const {onButtonPress, placeholder, icon, title, keyboard} = props;
   const [value, setValue] = React.useState('');
 
   const handleChangeText = text => {
@@ -27,6 +27,7 @@ const InputBox = props => {
       <View style={styles.textInputContainer}>
         <TextInput
           style={styles.inputBox}
+          keyboardType={keyboard}
           placeholder={placeholder}
           value={value}
           onChangeText={handleChangeText}
