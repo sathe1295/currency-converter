@@ -12,7 +12,6 @@ const CountryInfo = props => {
 
 const CountryItem = props => {
   const {country, showConversion, index} = props;
-  console.log('currencie', country);
   return (
     <View key={index} style={styles.container}>
       <View style={styles.sectionContainer}>
@@ -73,6 +72,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 0.5,
     elevation: 1,
+    marginTop: 25,
   },
   container: {
     padding: 10,

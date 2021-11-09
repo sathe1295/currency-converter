@@ -24,7 +24,7 @@ const MainScreen = () => {
     country.currencies.map(async currency => {
       let conversion = await convertAmount(amt, currency.code);
       currency['converted_amount'] = conversion;
-      conversion>0 ? setShowConversion(true) : null;
+      conversion > 0 ? setShowConversion(true) : null;
     });
   };
 
@@ -41,10 +41,12 @@ const MainScreen = () => {
       <InputBox
         onButtonPress={onSearch}
         placeholder={'Enter country name'}
+        title={'Country Name'}
         icon={SEARCH_ICON}
       />
       <InputBox
         onButtonPress={onConvert}
+        title={'Amount'}
         placeholder={'Enter amount in SEK'}
         icon={CONVERT_ICON}
       />

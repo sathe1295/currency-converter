@@ -5,10 +5,11 @@ import {
   TouchableOpacity,
   View,
   Image,
+  Text,
 } from 'react-native';
 
 const InputBox = props => {
-  const {onButtonPress, placeholder, icon} = props;
+  const {onButtonPress, placeholder, icon, title} = props;
   const [value, setValue] = React.useState('');
 
   const handleChangeText = text => {
@@ -21,22 +22,26 @@ const InputBox = props => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.inputBox}
-        placeholder={placeholder}
-        value={value}
-        onChangeText={handleChangeText}
-        onSubmitEditing={onSubmit}
-      />
-      <TouchableOpacity onPress={onSubmit} style={styles.button}>
-        <Image source={icon} style={styles.icon} />
-      </TouchableOpacity>
+      <Text style={styles.title}>{title}</Text>
+      <View style={styles.textInputContainer}>
+        <TextInput
+          style={styles.inputBox}
+          placeholder={placeholder}
+          value={value}
+          onChangeText={handleChangeText}
+          onSubmitEditing={onSubmit}
+        />
+        <TouchableOpacity onPress={onSubmit} style={styles.button}>
+          <Image source={icon} style={styles.icon} />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {flexDirection: 'row', marginHorizontal: 20, marginVertical: 20},
+  container: {marginHorizontal: 20, marginVertical: 10},
+  textInputContainer: {flexDirection: 'row'},
   inputBox: {
     height: 50,
     padding: 10,
@@ -62,6 +67,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'green',
   },
   icon: {height: 20, width: 20, top: 12},
+  title: {fontWeight: '400', marginBottom: 5},
 });
 
 export default InputBox;
