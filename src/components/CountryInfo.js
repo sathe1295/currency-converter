@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {StyleSheet, View, Text, Image} from 'react-native';
 
 const CountryInfo = props => {
@@ -18,7 +17,12 @@ const CountryItem = props => {
     <View key={index} style={styles.container}>
       <View style={styles.sectionContainer}>
         <Image source={{uri: country.flag}} style={styles.flag} />
-        <Text style={styles.countryName}>{country.name}</Text>
+        <Text
+          style={styles.countryName}
+          numberOfLines={2}
+          ellipsizeMode={'middle'}>
+          {country.name}
+        </Text>
       </View>
       <View>
         <View style={{marginTop: 10}}>
@@ -56,6 +60,7 @@ const CountryItem = props => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   countryInfo: {
     justifyContent: 'center',
@@ -91,7 +96,12 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   itemDetails: {marginTop: 5, justifyContent: 'space-around'},
-  countryName: {textAlign: 'center', fontWeight: 'bold', fontSize: 16},
+  countryName: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 16,
+    width: '70%',
+  },
   conversion: {backgroundColor: 'yellow', fontWeight: '500'},
   flag: {height: 30, width: 50},
   text: {

@@ -1,9 +1,11 @@
 import {isEmpty} from 'lodash';
-import React from 'react';
 
+import React from 'react';
 import {SafeAreaView, StatusBar, StyleSheet, View, Image} from 'react-native';
+
 import InputBox from '../components/InputBox';
 import CountryInfo from '../components/CountryInfo';
+
 import {SEARCH_ICON, CONVERT_ICON, CURRENCY_ICON} from '../assets/index';
 import {convertAmount, searchCountryByFullName} from '../api/currencies';
 
@@ -18,10 +20,11 @@ const MainScreen = () => {
   };
 
   const onConvert = async amt => {
+    setShowConversion(false);
     country.currencies.map(async currency => {
       let conversion = await convertAmount(amt, currency.code);
       currency['converted_amount'] = conversion;
-      setShowConversion(true);
+      conversion>0 ? setShowConversion(true) : null;
     });
   };
 
